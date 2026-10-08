@@ -2,7 +2,7 @@
 // Mở trang trên máy (localhost/127.0.0.1) thì gọi backend trên máy,
 // mở trên InfinityFree thì gọi backend trên Render.
 // >>> Sau khi deploy backend, thay link dưới đây bằng link Render của bạn (giữ đuôi /api) <<<
-const PRODUCTION_API_URL = "https://travel-plan-api.onrender.com/api";
+const PRODUCTION_API_URL = "https://travel-plan-itku.onrender.com/api";
 
 const API_BASE_URL = ["localhost", "127.0.0.1", ""].includes(location.hostname)
   ? "http://localhost:8080/api"
