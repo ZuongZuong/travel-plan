@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Lên kèo chuyến mới - travelplan</title>
+</head>
+<body data-page="trips">
+  <header class="site-header" id="siteHeader"></header>
+  <main class="wrap page">
+    <div>
+      <a href="trips.html" class="back-link" id="backLink">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        <span>Tất cả chuyến đi</span>
+      </a>
+      <p class="eyebrow" id="formEyebrow">Chuyến mới</p>
+      <h1 class="h-display page-title" id="formTitle">Lên kèo thôi!</h1>
+    </div>
+    <div class="form-layout">
+      <form class="card form-card" id="tripForm" novalidate>
+        <div class="field">
+          <label for="fName">Tên chuyến đi <span class="req">*</span></label>
+          <input class="input big" id="fName" name="name" maxlength="150" placeholder="Đà Lạt chill" autocomplete="off">
+          <span class="hint">Đặt tên cho vui, ví dụ "Hội An đêm rằm" hay "Trốn deadline ra biển".</span>
+        </div>
+
+        <div class="field">
+          <label for="fDest">Điểm đến <span class="req">*</span> <span class="hint" style="font-weight:600" id="destSource">· tìm trên bản đồ</span></label>
+          <div class="combo">
+            <div class="input-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input id="fDest" name="destination" maxlength="150" placeholder="Gõ tên nơi muốn đến, ví dụ Đà Lạt" autocomplete="off" style="font-weight:700">
+            </div>
+          </div>
+          <div class="map-card hidden" id="mapCard">
+            <iframe id="mapFrame" title="Bản đồ điểm đến" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="foot">
+              <div style="min-width:0">
+                <div style="font-weight:800" id="placeName"></div>
+                <div class="muted" style="font-size:13px" id="placeAddr"></div>
+              </div>
+              <a class="btn btn-sm" id="placeLink" target="_blank" rel="noopener">Mở Google Maps
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>Ngày đi và ngày về <span class="req">*</span></legend>
+          <div class="grid-2">
+            <button type="button" class="date-field" id="startBtn" aria-controls="calendarBox"><span class="lbl">Ngày đi</span><span class="val">Chọn ngày</span></button>
+            <button type="button" class="date-field" id="endBtn" aria-controls="calendarBox"><span class="lbl">Ngày về</span><span class="val">Chọn ngày</span></button>
+          </div>
+          <div id="calendarBox" class="hidden"></div>
+          <div class="nights-pill hidden" id="nightsPill" style="margin-top:12px"></div>
+        </fieldset>
+
+        <div class="field">
+          <label for="fBudget">Ngân sách dự kiến</label>
+          <div class="input-group">
+            <input id="fBudget" inputmode="numeric" placeholder="Ví dụ 6.000.000" autocomplete="off">
+            <span class="addon">VND</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap" id="budgetChips">
+            <button type="button" class="chip sm" data-budget="2000000">2 triệu</button>
+            <button type="button" class="chip sm" data-budget="5000000">5 triệu</button>
+            <button type="button" class="chip sm" data-budget="10000000">10 triệu</button>
+            <button type="button" class="chip sm" data-budget="20000000">20 triệu</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="fDesc">Mô tả</label>
+          <textarea class="input" id="fDesc" name="description" rows="3" maxlength="1000" placeholder="Đi với ai, mục tiêu chuyến này là gì..."></textarea>
+          <span class="hint" id="descCount">0/1000</span>
+        </div>
+
+        <label class="switch-row" for="fPublic">
+          <input type="checkbox" id="fPublic">
+          <span class="switch" aria-hidden="true"></span>
+          <span>
+            <b style="display:block">Chia sẻ công khai lịch trình</b>
+            <span class="hint" style="font-size:14px">Lịch trình hiện ở mục "Lịch trình hot" trên trang chủ để người khác dùng lại, kèm tên gọi của bạn. Khoản chi không bao giờ được chia sẻ.</span>
+          </span>
+        </label>
+
+        <div class="form-actions">
+          <a href="trips.html" class="btn btn-ghost" id="cancelLink">Hủy</a>
+          <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+            <span>Tạo chuyến đi</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <aside class="preview-col" aria-label="Xem trước thẻ chuyến đi">
+        <span class="muted" style="font-weight:700;font-size:14px">XEM TRƯỚC THẺ CHUYẾN ĐI</span>
+        <div id="previewCard"></div>
+        <p style="margin:8px 0 0;font-size:14px;color:var(--text-2)" id="previewNote">Thẻ cập nhật ngay khi bạn gõ. Ảnh bìa thêm sau ở trang chi tiết chuyến đi.</p>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap"><span>© 2026 travelplan</span><span>Đi nhiều, tính ít, chơi hết mình.</span></div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pickers.js"></script>
+  <script src="js/place-search.js"></script>
+  <script src="js/trip-form.js"></script>
+</body>
+</html>

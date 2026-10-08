@@ -1,0 +1,32 @@
+# Maven build
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Ảnh bìa người dùng tải lên khi chạy trên máy
+uploads/
+
+# File bí mật / cấu hình riêng trên máy (không đẩy lên GitHub)
+.env
+*.env
+application-local.properties
+
+# Log
+*.log
+logs/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+bin/
+out/
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>travelplan - Lên kèo. Chốt lịch. Xách balo đi.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <header class="site-header plain" id="siteHeader"></header>
+  <main>
+    <section class="wrap hero">
+      <div class="hero-copy">
+        <span class="hero-badge">Dành cho hội mê xê dịch</span>
+        <h1 class="h-display">Lên kèo.<br>Chốt lịch.<br><mark>Xách balo</mark> đi.</h1>
+        <p>Tạo chuyến đi, xếp lịch trình từng ngày và theo dõi chi tiêu để không vỡ quỹ giữa chừng. Tất cả trong một chỗ.</p>
+        <div class="hero-actions">
+          <a href="register.html?next=trip-form.html" class="btn btn-primary btn-lg" id="heroCta">
+            <span>Tạo chuyến đầu tiên</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#diem-den" class="btn btn-lg">Xem điểm đến</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="big">
+          <div class="row-between" style="align-items:flex-start">
+            <span class="tag tag-lime">Sắp đi · còn 10 ngày</span>
+            <span style="font-weight:600;font-size:14px">3N2Đ</span>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:600;opacity:.85">Lâm Đồng</div>
+            <div class="name">Đà Lạt chill</div>
+            <div style="margin-top:8px;font-weight:600">T7 17/10 – T2 19/10</div>
+          </div>
+        </div>
+        <div class="note time">
+          <span class="time-badge">05:00</span>
+          <div><div style="font-weight:700">Săn mây Cầu Đất</div><div class="muted" style="font-size:13px">Đồi chè Cầu Đất</div></div>
+        </div>
+        <div class="note fund">
+          <div style="font-size:13px;font-weight:700">Quỹ chuyến đi</div>
+          <div class="h-display" style="font-size:30px;letter-spacing:0">còn 1,25tr</div>
+          <div class="bar" style="margin-top:8px;background:#fff"><div style="width:68%;background:#16131F"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <span>Hà Giang ✶ Đà Lạt ✶ Phú Quốc ✶ Hội An ✶ Sa Pa ✶ Côn Đảo ✶ Quy Nhơn ✶ Ninh Bình ✶ Mộc Châu ✶ Hà Giang ✶ Đà Lạt ✶ Phú Quốc ✶ Hội An ✶ Sa Pa ✶ Côn Đảo ✶ Quy Nhơn ✶ Ninh Bình ✶ Mộc Châu ✶&nbsp;</span>
+    </div>
+
+    <section class="wrap section" id="diem-den">
+      <div class="section-head">
+        <h2 class="h-display">Cuối tuần này<br>đi đâu ta?</h2>
+        <p id="trendNote">Những nơi cộng đồng travelplan đang lên kèo nhiều nhất cho cuối tuần này.</p>
+      </div>
+      <div class="dest-grid" id="destGrid" aria-busy="true">
+        <div class="skeleton" style="height:220px"></div><div class="skeleton" style="height:220px"></div><div class="skeleton" style="height:220px"></div>
+      </div>
+
+      <div id="cong-dong" style="display:flex;flex-direction:column;gap:20px;margin-top:40px">
+        <div class="section-head">
+          <h3 class="h-display" style="font-size:clamp(28px,4vw,40px);letter-spacing:-1px">Lịch trình hot từ cộng đồng</h3>
+          <span class="muted" style="font-size:14px">Bấm "Dùng lại" để chép cả lịch trình sang chuyến của bạn</span>
+        </div>
+        <div class="community-grid" id="communityGrid" aria-busy="true">
+          <div class="skeleton" style="height:300px"></div><div class="skeleton" style="height:300px"></div><div class="skeleton" style="height:300px"></div>
+        </div>
+        <p class="muted" style="margin:0;font-size:13px">Chỉ hiện những chuyến mà chủ nhân đã bật "Chia sẻ công khai". Số chuyến ở từng điểm đến được đếm ẩn danh.</p>
+      </div>
+    </section>
+
+    <section class="wrap section" style="padding-top:72px">
+      <h2 class="h-display" style="font-size:clamp(36px,5vw,56px)">3 bước là xong kèo</h2>
+      <div class="steps">
+        <div class="card step"><span class="num">01</span><h3>Tạo chuyến đi</h3><p>Đặt tên thật kêu, chọn điểm đến trên bản đồ, ngày đi ngày về và ngân sách dự kiến.</p></div>
+        <div class="card step"><span class="num">02</span><h3>Xếp lịch trình</h3><p>Thêm từng hoạt động vào từng ngày, có giờ giấc và địa điểm rõ ràng.</p></div>
+        <div class="card step"><span class="num">03</span><h3>Canh quỹ chi tiêu</h3><p>Ghi lại từng khoản chi, xem tiền đi đâu và còn bao nhiêu để quẩy tiếp.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap" style="padding-top:24px;padding-bottom:96px">
+      <div class="cta">
+        <div style="flex:1 1 420px;min-width:0">
+          <h2 class="h-display">Chuyến tiếp theo<br>bắt đầu từ đây.</h2>
+          <p style="margin:0;font-size:18px" id="ctaText">Tạo tài khoản miễn phí, lên kế hoạch ngay hôm nay.</p>
+        </div>
+        <a href="register.html" class="btn btn-lime btn-lg" id="ctaBtn" style="font-weight:800">Tạo tài khoản</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap"><span>© 2026 travelplan</span><span>Đi nhiều, tính ít, chơi hết mình.</span></div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pickers.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

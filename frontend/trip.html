@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Chuyến đi - travelplan</title>
+</head>
+<body data-page="trips">
+  <header class="site-header" id="siteHeader"></header>
+  <main>
+    <section class="wrap" style="padding-top:32px">
+      <a href="trips.html" class="back-link" style="margin-bottom:16px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 18-6-6 6-6"/></svg>
+        Tất cả chuyến đi
+      </a>
+      <div class="trip-hero" id="tripHero" style="background:#16131F;color:#fff">
+        <div class="info"><div class="loading-line" style="color:inherit;text-align:left">Đang tải chuyến đi...</div></div>
+      </div>
+    </section>
+
+    <div class="wrap hidden" id="tripContent" style="padding-top:40px;padding-bottom:96px;display:flex;flex-direction:column;gap:28px">
+      <div class="row-between">
+        <div class="seg" role="tablist" aria-label="Phần của chuyến đi">
+          <button type="button" role="tab" id="tabPlan" aria-controls="viewPlan" aria-selected="true">Lịch trình</button>
+          <button type="button" role="tab" id="tabBudget" aria-controls="viewBudget" aria-selected="false">Ngân sách</button>
+        </div>
+      </div>
+
+      <div id="viewPlan" role="tabpanel" aria-labelledby="tabPlan" class="detail-layout">
+        <section class="detail-main">
+          <div class="row-between">
+            <h2 class="h-display section-title">Lịch trình</h2>
+            <button type="button" class="btn btn-dark" data-action="add-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+              Thêm hoạt động
+            </button>
+          </div>
+          <div class="day-tabs" id="dayTabs" role="tablist" aria-label="Chọn ngày"></div>
+          <div class="timeline" id="timeline" role="tabpanel" aria-live="polite"></div>
+        </section>
+        <aside class="detail-side" id="planSide"></aside>
+      </div>
+
+      <div id="viewBudget" role="tabpanel" aria-labelledby="tabBudget" class="hidden" style="display:flex;flex-direction:column;gap:28px"></div>
+    </div>
+  </main>
+
+  <!-- Thêm / sửa hoạt động -->
+  <div class="modal-backdrop hidden" id="itemModal">
+    <form class="modal" id="itemForm" role="dialog" aria-modal="true" aria-labelledby="itemTitle" novalidate>
+      <div class="modal-head">
+        <div><p class="sub trip-name"></p><h2 class="h-display" id="itemTitle">Thêm hoạt động</h2></div>
+        <button type="button" class="icon-btn bordered" data-close aria-label="Đóng"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+      </div>
+      <fieldset>
+        <legend>Ngày <span class="req">*</span></legend>
+        <div class="day-pick" id="itemDays"></div>
+      </fieldset>
+      <div class="field">
+        <label for="iActivity">Hoạt động <span class="req">*</span></label>
+        <input class="input big" id="iActivity" name="activity" maxlength="200" placeholder="Ví dụ: Săn mây Cầu Đất" autocomplete="off">
+      </div>
+      <div class="grid-2" style="align-items:start">
+        <div class="field" id="iStartField"><span class="label" id="iStartLbl">Bắt đầu</span></div>
+        <div class="field" id="iEndField"><span class="label" id="iEndLbl">Kết thúc</span></div>
+      </div>
+      <div class="field">
+        <label for="iLocation">Địa điểm</label>
+        <div class="input-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <input id="iLocation" name="location" maxlength="200" placeholder="Ví dụ: Đồi chè Cầu Đất" autocomplete="off">
+        </div>
+      </div>
+      <div class="field">
+        <label for="iNote">Ghi chú</label>
+        <textarea class="input" id="iNote" name="note" rows="2" maxlength="1000" placeholder="Đặt trước, mang theo gì..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Hủy</button>
+        <button type="button" class="btn" id="itemSaveMore">Lưu &amp; thêm tiếp</button>
+        <button type="submit" class="btn btn-primary">Lưu hoạt động</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Thêm / sửa khoản chi -->
+  <div class="modal-backdrop hidden" id="expenseModal">
+    <form class="modal" id="expenseForm" role="dialog" aria-modal="true" aria-labelledby="expTitle" novalidate>
+      <div class="modal-head">
+        <div><p class="sub trip-name"></p><h2 class="h-display" id="expTitle">Thêm khoản chi</h2></div>
+        <button type="button" class="icon-btn bordered" data-close aria-label="Đóng"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+      </div>
+      <div class="field">
+        <label for="eAmount">Số tiền <span class="req">*</span></label>
+        <div class="amount-box">
+          <input id="eAmount" inputmode="numeric" placeholder="0" autocomplete="off">
+          <span aria-hidden="true">đ</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="amountChips">
+          <button type="button" class="chip sm" data-add="50000">+50k</button>
+          <button type="button" class="chip sm" data-add="100000">+100k</button>
+          <button type="button" class="chip sm" data-add="200000">+200k</button>
+          <button type="button" class="chip sm" data-add="500000">+500k</button>
+          <button type="button" class="btn btn-ghost btn-sm" data-add="0">Xóa số</button>
+        </div>
+      </div>
+      <fieldset>
+        <legend>Loại chi phí <span class="req">*</span></legend>
+        <div class="cat-pick" id="catPick"></div>
+      </fieldset>
+      <div class="field">
+        <label for="eDesc">Nội dung <span class="req">*</span></label>
+        <input class="input" id="eDesc" name="description" maxlength="200" placeholder="Ví dụ: Bánh tráng nướng chợ đêm" autocomplete="off">
+      </div>
+      <fieldset>
+        <legend>Ngày chi</legend>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="expDates"></div>
+        <div id="expCalendar" class="hidden"></div>
+      </fieldset>
+      <div class="impact" id="impact" aria-live="polite"></div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" data-close>Hủy</button>
+        <button type="button" class="btn" id="expSaveMore">Lưu &amp; thêm tiếp</button>
+        <button type="submit" class="btn btn-primary">Lưu khoản chi</button>
+      </div>
+    </form>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap"><span>© 2026 travelplan</span><span>Đi nhiều, tính ít, chơi hết mình.</span></div>
+  </footer>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/pickers.js"></script>
+  <script src="js/trip-detail.js"></script>
+</body>
+</html>

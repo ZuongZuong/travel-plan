@@ -1,0 +1,22 @@
+# Node (nếu sau này dùng npm, Live Server...)
+node_modules/
+npm-debug.log*
+
+# File zip tạo ra để tải lên InfinityFree
+*.zip
+
+# File cấu hình riêng trên máy
+.env
+js/config.local.js
+
+# File sao lưu khi sửa code
+*.bak
+*.bak-*
+
+# IDE
+.idea/
+.vscode/
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db

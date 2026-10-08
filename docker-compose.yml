@@ -1,0 +1,34 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: travelplan-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "TravelPlan@123"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1434:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
+  # Tạo database travel_plan một lần sau khi SQL Server sẵn sàng
+  sqlserver-init:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    entrypoint: >
+      /opt/mssql-tools18/bin/sqlcmd -C -S sqlserver -U sa -P "TravelPlan@123"
+      -Q "IF DB_ID('travel_plan') IS NULL CREATE DATABASE travel_plan COLLATE Vietnamese_CI_AS;"
+    restart: "no"
+
+volumes:
+  sqlserver-data:
