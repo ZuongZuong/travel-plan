@@ -1,0 +1,6 @@
+# Mỗi thư mục backend/ và frontend/ có .gitignore riêng
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
