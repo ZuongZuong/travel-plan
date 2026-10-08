@@ -45,8 +45,6 @@ travel-plan/
         └── home.js, auth.js, trips.js, trip-form.js, trip-detail.js
 ```
 
-## Đưa lên mạng
-Xem [DEPLOY.md](DEPLOY.md): frontend trên InfinityFree, backend trên Render, database PostgreSQL trên Neon.
 
 ## Cách chạy
 
